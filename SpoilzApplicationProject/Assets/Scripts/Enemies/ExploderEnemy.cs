@@ -24,6 +24,7 @@ public class ExploderEnemy : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent.speed = moveSpeed;
+        animator.SetBool("shouldExplode", false);
     }
 
     private void Update()
@@ -35,6 +36,7 @@ public class ExploderEnemy : MonoBehaviour
         if (!isFusing)
         {
             agent.SetDestination(player.position);
+            animator.Play("Explodebt_MoveForward", 0, 0f);
 
             if (distance <= explodeDistance)
             {
@@ -57,6 +59,7 @@ public class ExploderEnemy : MonoBehaviour
         isFusing = true;
         fuseTimer = fuseTime;
         agent.ResetPath();
+        animator.SetBool("shouldExplode", true);
     }
 
     private void Explode()
@@ -75,13 +78,15 @@ public class ExploderEnemy : MonoBehaviour
         }
 
         Collider[] hits = Physics.OverlapSphere(transform.position, explosionRadius);
+        bool alreadyDamaged = false;
 
         foreach (Collider hit in hits)
         {
-            PlayerStats stats = hit.GetComponent<PlayerStats>();
-            if (stats != null)
+            PlayerStats stats = hit.GetComponentInParent<PlayerStats>();
+            if (stats != null && !alreadyDamaged)
             {
                 stats.TakeDamage(explosionDamage);
+                alreadyDamaged = true;
             }
         }
 
