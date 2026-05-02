@@ -9,6 +9,7 @@ public class SpawnDoor : MonoBehaviour
         if (other.tag == "Player")
         {
             door.SetActive(true);
+            Destroy(this.gameObject);
         }
     }
 }
