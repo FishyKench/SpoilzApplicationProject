@@ -5,7 +5,8 @@ public class PlayerStats : MonoBehaviour
 {
     public float maxHealth = 100f;
 
-    private float currentHealth;
+    public float currentHealth;
+    
 
 
     private void Awake()
