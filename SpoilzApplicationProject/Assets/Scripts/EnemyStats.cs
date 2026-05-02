@@ -5,9 +5,12 @@ public class EnemyStats : MonoBehaviour
     public float maxHealth = 50f;
     private float currentHealth;
 
+    PlayerStats playerStats;
+
     private void Awake()
     {
         currentHealth = maxHealth;
+        playerStats = FindAnyObjectByType<PlayerStats>();
     }
 
     public void TakeDamage(float amount)
@@ -23,6 +26,10 @@ public class EnemyStats : MonoBehaviour
 
     private void Die()
     {
+        if(playerStats != null)
+        {
+            playerStats.Heal(20f);
+        }
         Destroy(gameObject);
     }
 }

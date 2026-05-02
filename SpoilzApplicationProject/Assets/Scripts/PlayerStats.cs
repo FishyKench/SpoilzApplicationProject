@@ -24,8 +24,20 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public void Heal(float amount)
+    {
+        currentHealth = currentHealth + amount;
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+    }
+
     private void Die()
     {
-        FindFirstObjectByType<DeathScreen>().ShowDeathScreen();
+        GameTimer timer = FindFirstObjectByType<GameTimer>();
+        timer.StopTimer();
+        DeathScreen deathScreen = FindFirstObjectByType<DeathScreen>();
+        deathScreen.ShowDeathScreen(timer.GetTimeFormatted());  
     }
 }
