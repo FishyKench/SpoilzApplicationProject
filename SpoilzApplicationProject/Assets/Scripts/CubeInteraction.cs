@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class CubeInteraction : MonoBehaviour, IInteractable
 {
-    [SerializeField] private GameObject target;
+    [SerializeField] private GameObject door;
     public void Interact()
     {
-        Debug.Log("has interacted with " + this.gameObject.name);
+        door.SetActive(false);
     }
 }
