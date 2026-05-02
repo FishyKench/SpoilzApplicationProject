@@ -25,6 +25,7 @@ public class ExploderEnemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent.speed = moveSpeed;
         animator.SetBool("shouldExplode", false);
+        agent.stoppingDistance = 0f;
     }
 
     private void Update()
