@@ -17,6 +17,7 @@ public class CameraFollow : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (Time.timeScale == 0f) return;
         xRotation -= player.LookInput.y * sensitivity;
         xRotation = Mathf.Clamp(xRotation, -clampAngle, clampAngle);
 

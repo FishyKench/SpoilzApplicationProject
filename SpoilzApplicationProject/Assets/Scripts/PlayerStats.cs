@@ -25,6 +25,6 @@ public class PlayerStats : MonoBehaviour
 
     private void Die()
     {
-        Destroy(this.gameObject);
+        FindFirstObjectByType<DeathScreen>().ShowDeathScreen();
     }
 }
