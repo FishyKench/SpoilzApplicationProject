@@ -18,6 +18,10 @@ public class ExploderEnemy : MonoBehaviour
     private bool hasExploded = false;
     private float fuseTimer;
 
+    public AudioSource audioSource;
+
+    public AudioClip explosionSound;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -67,6 +71,7 @@ public class ExploderEnemy : MonoBehaviour
     {
         if (hasExploded) return;
         hasExploded = true;
+        AudioSource.PlayClipAtPoint(explosionSound, transform.position, 0.5f);
 
         if (visualModel != null)
         {

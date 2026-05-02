@@ -5,6 +5,10 @@ public class EnemyStats : MonoBehaviour
     public float maxHealth = 50f;
     private float currentHealth;
 
+    public AudioSource audioSource;
+
+    public AudioClip deathSound;
+
     PlayerStats playerStats;
 
     private void Awake()
@@ -26,7 +30,8 @@ public class EnemyStats : MonoBehaviour
 
     private void Die()
     {
-        if(playerStats != null)
+        AudioSource.PlayClipAtPoint(deathSound, transform.position, 0.5f);
+        if (playerStats != null)
         {
             playerStats.Heal(20f);
         }
